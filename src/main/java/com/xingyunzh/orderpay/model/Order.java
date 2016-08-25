@@ -5,13 +5,10 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Order implements Serializable {
 	private static final long serialVersionUID = 3678107792576131021L;
 
-	private long id;
+	private long id = 0;
 	private String customerId;
 	private String sellerId;
 	private String description;
