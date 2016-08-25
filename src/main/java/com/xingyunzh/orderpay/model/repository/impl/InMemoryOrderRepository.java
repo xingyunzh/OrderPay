@@ -22,12 +22,12 @@ public class InMemoryOrderRepository implements OrderRepository {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Autowired
-	private PaymentRepository paymentRepo;
+	private PaymentRepository paymentRepository;
 
 	@Override
 	public List<Order> getAllOrders() {
 		List<Order> results = jdbcTemplate.query("select * from \"order\"",
-				new OrderRowMapper(jdbcTemplate, paymentRepo));
+				new OrderRowMapper(jdbcTemplate, paymentRepository));
 		return results;
 	}
 
@@ -36,7 +36,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("userid", userid);
 		List<Order> results = jdbcTemplate.query("select * from \"order\" where customerid = :userid", params,
-				new OrderRowMapper(jdbcTemplate, paymentRepo));
+				new OrderRowMapper(jdbcTemplate, paymentRepository));
 		return results;
 	}
 
@@ -45,7 +45,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		List<Order> results = jdbcTemplate.query("select * from \"order\" where id = :id", params,
-				new OrderRowMapper(jdbcTemplate, paymentRepo));
+				new OrderRowMapper(jdbcTemplate, paymentRepository));
 		if (!results.isEmpty()) {
 			return results.get(0);
 		} else {
