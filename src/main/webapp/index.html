@@ -6,5 +6,67 @@
 </head>
 <body>
 	<h1>Welcome to Order &amp; Payment System</h1>
+	
+	<h1>RESTful API</h1>
+	<h2>1.Order</h2>
+	<ol>
+		<li>GET /orderpay/order/getall</li>
+		<li>GET /orderpay/order/id/{orderid}</li>
+		<li>GET /orderpay/order/customer/{customerid}</li>
+		<li>GET /orderpay/order/delete/{orderid}</li>
+		<li>POST /orderpay/order/create <br>
+			Body <br>
+			<pre>
+	{
+    "customerId": "jim",
+    "sellerId": "jd",
+    "description": "testpay2",
+    "totalPrice": 600,
+    "orderItems": [
+      {
+        "id": 1,
+        "name": "productX",
+        "externalId": "exd"
+      },
+      {
+        "id": 2,
+        "name": "productyY",
+        "externalId": "exz"
+      }
+    ],
+    "createtime": 1472702400000,
+    "liveDuration": 1800,
+    "callbackURL": "http://sample2",
+    "state": "OrderStateInit"
+    }
+			</pre>				
+		</li>
+	</ol>
+	<h2>2.Payment</h2>
+	<ol>
+		<li>GET /orderpay/pay/getall</li>
+		<li>GET /orderpay/pay/id/{paymentid}</li>
+		<li>GET /orderpay/pay/order/{orderid}</li>
+		<li>GET /orderpay/pay/id/{paymentid}/state/{state}</li>
+		<li>GET /orderpay/pay/id/{paymentid}/note/{note}</li>
+		<li>GET /orderpay/pay/delete/{paymentid}</li>
+		<li>POST /orderpay/pay/create/{orderid} <br>
+			Body <br>
+			<pre>
+	{
+      "amount": 90,
+      "paytime": 1472704200000,
+      "fromAccount": "aly3",
+      "toAccount": "corp",
+      "referenceText": "xxxr4",
+      "note": "testnote3333",
+      "state": "PaymentStateSuccess",
+      "type": "PaymentTypeAlipay"
+    }
+			</pre>
+		
+		</li>
+	</ol>
+	
 </body>
 </html>
