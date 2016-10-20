@@ -15,7 +15,6 @@ import com.xingyunzh.orderpay.model.OrderItem;
 import com.xingyunzh.orderpay.model.repository.OrderRepository;
 import com.xingyunzh.orderpay.model.repository.PaymentRepository;
 
-@Repository
 public class InMemoryOrderRepository implements OrderRepository {
 
 	@Autowired
