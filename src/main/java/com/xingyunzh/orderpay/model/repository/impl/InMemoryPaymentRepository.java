@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.xingyunzh.orderpay.model.Payment;
 import com.xingyunzh.orderpay.model.repository.PaymentRepository;
 
-@Repository
 public class InMemoryPaymentRepository implements PaymentRepository {
 
 	@Autowired

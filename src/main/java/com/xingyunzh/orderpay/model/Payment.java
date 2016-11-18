@@ -4,6 +4,17 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="T_PAYMENT")
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 3678107792576131025L;
 	
@@ -16,6 +27,9 @@ public class Payment implements Serializable {
 	private String note;
 	private State state;
 	private Type type;
+	private Order order;
+
+
 
 	public enum State {
 		PaymentStateSuccess,
@@ -31,6 +45,8 @@ public class Payment implements Serializable {
 		PaymentTypeOfflineCash
 	}
 
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -39,6 +55,7 @@ public class Payment implements Serializable {
 		this.id = id;
 	}
 
+	@Column(name="AMOUNT")
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -47,6 +64,7 @@ public class Payment implements Serializable {
 		this.amount = amount;
 	}
 
+	@Column(name="PAY_TIME")
 	public Timestamp getPaytime() {
 		return paytime;
 	}
@@ -55,6 +73,7 @@ public class Payment implements Serializable {
 		this.paytime = paytime;
 	}
 
+	@Column(name="FROM_ACCOUNT")
 	public String getFromAccount() {
 		return fromAccount;
 	}
@@ -63,6 +82,7 @@ public class Payment implements Serializable {
 		this.fromAccount = fromAccount;
 	}
 
+	@Column(name="TO_ACCOUNT")
 	public String getToAccount() {
 		return toAccount;
 	}
@@ -71,6 +91,7 @@ public class Payment implements Serializable {
 		this.toAccount = toAccount;
 	}
 
+	@Column(name="REFERENCE_TEXT")
 	public String getReferenceText() {
 		return referenceText;
 	}
@@ -79,6 +100,7 @@ public class Payment implements Serializable {
 		this.referenceText = referenceText;
 	}
 
+	@Column(name="NOTE")
 	public String getNote() {
 		return note;
 	}
@@ -87,6 +109,7 @@ public class Payment implements Serializable {
 		this.note = note;
 	}
 
+	@Column(name="STATE")
 	public State getState() {
 		return state;
 	}
@@ -94,7 +117,7 @@ public class Payment implements Serializable {
 	public void setState(State state) {
 		this.state = state;
 	}
-
+	@Column(name="TYPE")
 	public Type getType() {
 		return type;
 	}
@@ -102,7 +125,18 @@ public class Payment implements Serializable {
 	public void setType(Type type) {
 		this.type = type;
 	}
-	
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="orderid")
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
 	@Override
 	public int hashCode() {
 		int prime = 31;

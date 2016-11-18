@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void createOrder(Order order) {
+	public long createOrder(Order order) {
 		// create order
 		long orderid = orderRepository.createOrder(order);
 		order.setId(orderid);
@@ -41,6 +41,8 @@ public class OrderServiceImpl implements OrderService {
 		if (items != null && !items.isEmpty()){
 			orderRepository.createOrderItemsForOrder(orderid, items);			
 		}
+		
+		return orderid;
 	}
 
 	@Override

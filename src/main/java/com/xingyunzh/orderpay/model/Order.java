@@ -5,6 +5,18 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+@Entity
+@Table(name="T_ORDER")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 3678107792576131021L;
 
@@ -24,6 +36,8 @@ public class Order implements Serializable {
 		OrderStateInit, OrderStatePaid, OrderStateCancelled, OrderStateRefunded, OrderStatePartialRefunded, OrderStateClose
 	};
 
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -32,6 +46,7 @@ public class Order implements Serializable {
 		this.id = id;
 	}
 
+	@Column(name="CUSTOMER_ID")
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -40,6 +55,7 @@ public class Order implements Serializable {
 		this.customerId = customerId;
 	}
 
+	@Column(name="SELLER_ID")
 	public String getSellerId() {
 		return sellerId;
 	}
@@ -48,6 +64,7 @@ public class Order implements Serializable {
 		this.sellerId = sellerId;
 	}
 
+	@Column(name="DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -56,6 +73,8 @@ public class Order implements Serializable {
 		this.description = description;
 	}
 
+	@OneToMany(mappedBy="order")
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -64,6 +83,7 @@ public class Order implements Serializable {
 		this.orderItems = orderItems;
 	}
 
+	@Column(name="CREATE_TIME")
 	public Timestamp getCreatetime() {
 		return createtime;
 	}
@@ -72,6 +92,7 @@ public class Order implements Serializable {
 		this.createtime = createtime;
 	}
 
+	@Column(name="LIVE_DURATION")
 	public int getLiveDuration() {
 		return liveDuration;
 	}
@@ -80,6 +101,7 @@ public class Order implements Serializable {
 		this.liveDuration = liveDuration;
 	}
 
+	@Column(name="CALLBACK_URL")
 	public String getCallbackURL() {
 		return callbackURL;
 	}
@@ -88,6 +110,7 @@ public class Order implements Serializable {
 		this.callbackURL = callbackURL;
 	}
 
+	@Column(name="STATE")
 	public OrderState getState() {
 		return state;
 	}
@@ -96,6 +119,7 @@ public class Order implements Serializable {
 		this.state = state;
 	}
 
+	@Column(name="TOTAL_PRICE")
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
@@ -104,6 +128,8 @@ public class Order implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 
+	@OneToMany(mappedBy="order")
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	public List<Payment> getPayments() {
 		return payments;
 	}
